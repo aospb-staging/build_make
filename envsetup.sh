@@ -500,6 +500,13 @@ function lunch()
 
 function _lunch_meat()
 {
+    if (echo -n $1 | grep -q -e "^aosp_") ; then
+        CUSTOM_BUILD=$(echo -n $1 | sed -e 's/^aosp_//g')
+    else
+        CUSTOM_BUILD=
+    fi
+    export CUSTOM_BUILD
+
     local product=$1
     local release=$2
     local variant=$3
@@ -524,6 +531,8 @@ function _lunch_meat()
 
     [[ -n "${ANDROID_QUIET_BUILD:-}" ]] || echo
 
+    fixup_common_out_dir
+    
     set_stuff_for_environment
     [[ -n "${ANDROID_QUIET_BUILD:-}" ]] || printconfig
 
