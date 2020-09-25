@@ -215,6 +215,27 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   script.Print("Target: {}".format(target_info.fingerprint))
 
   script.AppendExtra("ifelse(is_mounted(\"/system\"), unmount(\"/system\"));")
+  android_version = target_info.GetBuildProp("ro.build.version.release")
+  build_id = target_info.GetBuildProp("ro.build.id")
+  build_date = target_info.GetBuildProp("ro.build.date")
+  security_patch = target_info.GetBuildProp("ro.build.version.security_patch")
+  device = target_info.GetBuildProp("ro.build.product")
+  script.Print("------------------------------------------");
+  script.Print("                      _____  ____         ");
+  script.Print("                     |  __ \|  _ \        ");
+  script.Print("       __ _  ___  ___| |__) | |_) |       ");
+  script.Print("      / _` |/ _ \/ __|  ___/|  _ <        ");
+  script.Print("     | (_| | (_) \__ \ |    | |_) |       ");
+  script.Print("      \__,_|\___/|___/_|    |____/        ");
+  script.Print("                                          ");
+  script.Print("  a homemade custom rom by @paperboy22    ");
+  script.Print("------------------------------------------");
+  script.Print(" Android version: %s"%(android_version));
+  script.Print(" Build id: %s"%(build_id));
+  script.Print(" Build date: %s"%(build_date));
+  script.Print(" Security patch: %s"%(security_patch));
+  script.Print(" Device: %s"%(device));
+  script.Print("------------------------------------------");
   device_specific.FullOTA_InstallBegin()
 
   CopyInstallTools(output_zip)
